@@ -1,4 +1,4 @@
-libvirt (0.4.6-10~bpo40+1) unstable; urgency=low
+libvirt (0.4.6-10~bpo40+1) etch-backports; urgency=low
 
   * Rebuild for etch-backports.
   * [c720dc5] fix compilation with etch's gcc 4.1
