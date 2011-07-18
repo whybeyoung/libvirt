@@ -1,3 +1,19 @@
+libvirt (0.8.3-5+squeeze2~bpo50+2) lenny-backports; urgency=low
+
+  * Rebuild for lenny-backports.
+  * Remaining changes:
+      * [8ec86d5] remove versioned dependency on dpkg-dev.
+                  Lenny isn't affected by this problem.
+      * [3f71e40] Use hal instead of udev on Lenny
+      * [aa1a2b8] Use PolicyKit-0 files on Lenny
+      * [02fafb0] Disable macvtap support
+        since we're lacking the apropriate kernel headers
+      * [c1fd828] Suggest hal
+      * [6e61dbd] Update dependencies for backport.org
+      * [c6c93ca] Properly disable macvtap
+
+ -- Guido Günther <agx@sigxcpu.org>  Mon, 18 Jul 2011 12:29:29 +0200
+
 libvirt (0.8.3-5+squeeze2) stable-security; urgency=low
 
   * [ac67c93] CVE-2011-1486: Make error reporting in libvirtd thread safe
