@@ -1,3 +1,20 @@
+libvirt (0.9.12-4~bpo60+1) squeeze-backports; urgency=low
+
+  * Rebuild for squeeze-backports.
+  * Remaining changes
+    * [82758c4] Use dh_pycentral on Squeeze since there's no dh_python2 yet.
+    * [e9ebaaf] Use XS-Python-Version instead of X-Python-Version since we
+      still use dh_pycentral
+    * [c754689] Disable the testsuite for backport builds
+    * [69fd64c] Don't fail if we can't setup avahi
+    * [eb68005] virnetdev: Check for defined IFLA_VF_* Thanks to Philipp Hahn
+    * [31a43dd] Disable macvtap on Squeeze since it's kernel is too old to
+      compile it.
+    * [befaa18] Disable werror since Squeeze's libnl throws warnings
+    * [8a2008d] Disable netcf not available in Squeeze
+
+ -- Guido Günther <agx@sigxcpu.org>  Fri, 24 Aug 2012 12:30:27 +0200
+
 libvirt (0.9.12-4) unstable; urgency=low
 
   * [80ac2a6] Fix CVE-2012-3445 with upstream commit
