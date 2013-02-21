@@ -1,3 +1,13 @@
+libvirt (0.9.12-6~bpo60+1) squeeze-backports; urgency=low
+
+  To support newer machine types (as might be requested by newer versions of
+  virtinst or virt-manager) the recommended verson of qemu-kvm was bumped
+  to >= 1.1.2. This version is also available as a squeeze-backport. If you
+  don't intend to use newer machine types you can stick to the version from
+  Squeeze.
+
+ -- Guido Günther <agx@sigxcpu.org>  Thu, 21 Feb 2013 19:00:53 +0100
+
 libvirt (0.8.3-2) unstable; urgency=low
 
   Disk format probing is disabled now by default for security reasons
