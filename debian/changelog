@@ -1,3 +1,43 @@
+libvirt (0.9.12-11) unstable; urgency=low
+
+  * [422c506] Use "getent passwd" instead of the non existing "getent user"
+    Thanks to again to Adam D. Barratt
+
+ -- Guido Günther <agx@sigxcpu.org>  Wed, 06 Mar 2013 12:27:09 +0100
+
+libvirt (0.9.12-10) unstable; urgency=low
+
+  * [56bcb4c] Properly remove libvirt-qemu group and user.
+    Thanks to Adam D. Barratt for noticing
+  * [8abfe79] Make sure libvirt-bin.NEWS gets displayed in wheezy as well
+
+ -- Guido Günther <agx@sigxcpu.org>  Wed, 06 Mar 2013 08:23:55 +0100
+
+libvirt (0.9.12-9) unstable; urgency=low
+
+  * [424ffbc] Revert "Enable systemd services" We enabled systemd support in
+    0.9.13 Thanks to Antti-Juhani Kaijanaho
+    (Closes: #702324)
+
+ -- Guido Günther <agx@sigxcpu.org>  Tue, 05 Mar 2013 12:35:06 +0100
+
+libvirt (0.9.12-8) unstable; urgency=low
+
+  * [181eab1] CVE-2013-1766: Use libvirt-qemu as group to run qemu/kvm
+    instances.  This makes sure we don't chown files to groups possibly used
+    by other programs. (Closes: #701649)
+  * [0ef17cc] Enable systemd services
+
+ -- Guido Günther <agx@sigxcpu.org>  Mon, 04 Mar 2013 16:58:19 +0100
+
+libvirt (0.9.12-7) unstable; urgency=low
+
+  * [d45d576] qemu: Add support for -no-user-config
+    so newer cpu models can be used.
+    Thanks to Philipp Kern for his report and testing (Closes: #699813)
+
+ -- Guido Günther <agx@sigxcpu.org>  Sun, 17 Feb 2013 10:09:07 +0100
+
 libvirt (0.9.12-6~bpo60+1) squeeze-backports; urgency=low
 
   * Rebuild for squeeze-backports.
