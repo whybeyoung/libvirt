@@ -1,3 +1,12 @@
+libvirt (3.0.0-4+deb9u3) stretch-security; urgency=high
+
+  * gbp: switch branch to stretch
+  * CVE-2018-1064: qemu: avoid denial of service reading from QEMU guest agent
+  * CVE-2018-6764: virlog: determine the hostname on startup
+    (Closes: #889839)
+
+ -- Guido Günther <agx@sigxcpu.org>  Mon, 12 Mar 2018 19:11:51 +0100
+
 libvirt (3.0.0-4+deb9u2) stretch; urgency=medium
 
   * CVE-2018-5748: qemu: avoid denial of service reading from QEMU monitor
