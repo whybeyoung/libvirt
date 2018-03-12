@@ -26,3 +26,4 @@ security/qemu-ensure-TLS-clients-always-verify-the-server-certific.patch
 qemu-shared-disks-with-cache-directsync-should-be-safe-fo.patch
 qemu-avoid-denial-of-service-reading-from-QEMU-monitor-CV.patch
 security/CVE-2018-1064-qemu-avoid-denial-of-service-reading-from-Q.patch
+security/CVE-2018-6764-virlog-determine-the-hostname-on-startup.patch
