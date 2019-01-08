@@ -13,7 +13,6 @@ export DEB_LDFLAGS_MAINT_STRIP = -Wl,-Bsymbolic-functions
 ifneq (,$(findstring $(DEB_HOST_ARCH_OS), linux))
   ifneq (,$(findstring $(DEB_HOST_ARCH), i386 amd64))
     WITH_VBOX         = --with-vbox
-    FAIL_CHECK        = 1
   else
     WITH_VBOX         = --without-vbox
   endif
@@ -24,6 +23,7 @@ ifneq (,$(findstring $(DEB_HOST_ARCH_OS), linux))
     WITH_LIBXL        = --without-libxl
   endif
   MAKE_CHECK        = 1
+  FAIL_CHECK        = 1
   WITH_STORAGE_LVM    = --with-storage-lvm
   WITH_STORAGE_ISCSI  = --with-storage-iscsi
   WITH_STORAGE_DISK   =	--with-storage-disk
