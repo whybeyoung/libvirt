@@ -34,3 +34,4 @@ security/api-disallow-virDomainManagedSaveDefineXML-on-read-only-c.patch
 security/api-disallow-virConnectGetDomainCapabilities-on-read-only.patch
 security/api-disallow-virConnect-HypervisorCPU-on-read-only-connec.patch
 Include-etc-pki-qemu-in-apparmor.patch
+apparmor-Allow-run-pygrup.patch
