@@ -55,6 +55,7 @@ License: LGPL-2.1+
 
 Files: gnulib/tests/*
        build-aux/snippet/*
+Copyright: 1989-2019 Free Software Foundation, Inc.
 License: GPL-3+
 
 Files:     src/vbox/vbox*
