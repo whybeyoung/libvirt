@@ -2,7 +2,12 @@ usr/sbin/*
 usr/lib/libvirt/libvirt_*
 usr/lib/libvirt/libvirt-guests.sh
 usr/lib/*/libvirt/lock-driver/lockd.so
-usr/lib/*/libvirt/connection-driver
+usr/lib/*/libvirt/connection-driver/libvirt_driver_interface.so
+usr/lib/*/libvirt/connection-driver/libvirt_driver_network.so
+usr/lib/*/libvirt/connection-driver/libvirt_driver_nodedev.so
+usr/lib/*/libvirt/connection-driver/libvirt_driver_nwfilter.so
+usr/lib/*/libvirt/connection-driver/libvirt_driver_secret.so
+usr/lib/*/libvirt/connection-driver/libvirt_driver_storage.so
 usr/share/augeas/*
 usr/share/bash-completion/*
 usr/share/man/man8/*

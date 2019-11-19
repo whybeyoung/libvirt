@@ -99,12 +99,16 @@ Depends:
  ${misc:Depends},
  ${shlibs:Depends},
  libvirt0 (= ${binary:Version}),
+ libvirt-daemon-driver-qemu,
 Enhances: qemu, qemu-kvm, xen
 Section: admin
 Recommends:
  qemu-kvm | qemu (>= 0.9.1),
  libxml2-utils,
  netcat-openbsd,
+ libvirt-daemon-driver-lxc,
+ libvirt-daemon-driver-vbox,
+ libvirt-daemon-driver-xen,
 Suggests:
  libvirt-daemon-driver-storage-gluster,
  libvirt-daemon-driver-storage-rbd,
@@ -118,6 +122,74 @@ Description: Virtualization daemon
  supports QEMU, KVM, XEN, OpenVZ, LXC, and VirtualBox.
  .
  This package contains the daemon libvirtd to manage the hypervisors.
+
+Package: libvirt-daemon-driver-qemu
+Architecture: linux-any
+Depends:
+ ${misc:Depends},
+ ${shlibs:Depends},
+ libvirt-daemon (= ${binary:Version}),
+Replaces: libvirt-daemon (<< 5.6.0-3~)
+Breaks: libvirt-daemon (<< 5.6.0-3~)
+Section: admin
+Description: Virtualization daemon QEMU connection driver
+ Libvirt is a C toolkit to interact with the virtualization capabilities
+ of recent versions of Linux (and other OSes). The library aims at providing
+ a long term stable C API for different virtualization mechanisms. It currently
+ supports QEMU, KVM, XEN, OpenVZ, LXC, and VirtualBox.
+ .
+ This package contains the libvirtd connection driver for QEMU.
+
+Package: libvirt-daemon-driver-lxc
+Architecture: linux-any
+Depends:
+ ${misc:Depends},
+ ${shlibs:Depends},
+ libvirt-daemon (= ${binary:Version}),
+Replaces: libvirt-daemon (<< 5.6.0-3~)
+Breaks: libvirt-daemon (<< 5.6.0-3~)
+Section: admin
+Description: Virtualization daemon LXC connection driver
+ Libvirt is a C toolkit to interact with the virtualization capabilities
+ of recent versions of Linux (and other OSes). The library aims at providing
+ a long term stable C API for different virtualization mechanisms. It currently
+ supports QEMU, KVM, XEN, OpenVZ, LXC, and VirtualBox.
+ .
+ This package contains the libvirtd connection driver for LXC.
+
+Package: libvirt-daemon-driver-vbox
+Architecture: i386 amd64
+Depends:
+ ${misc:Depends},
+ ${shlibs:Depends},
+ libvirt-daemon (= ${binary:Version}),
+Replaces: libvirt-daemon (<< 5.6.0-3~)
+Breaks: libvirt-daemon (<< 5.6.0-3~)
+Section: admin
+Description: Virtualization daemon VirtualBox connection driver
+ Libvirt is a C toolkit to interact with the virtualization capabilities
+ of recent versions of Linux (and other OSes). The library aims at providing
+ a long term stable C API for different virtualization mechanisms. It currently
+ supports QEMU, KVM, XEN, OpenVZ, LXC, and VirtualBox.
+ .
+ This package contains the libvirtd connection driver for VirtualBox.
+
+Package: libvirt-daemon-driver-xen
+Architecture: i386 amd64 armhf arm64
+Depends:
+ ${misc:Depends},
+ ${shlibs:Depends},
+ libvirt-daemon (= ${binary:Version}),
+Replaces: libvirt-daemon (<< 5.6.0-3~)
+Breaks: libvirt-daemon (<< 5.6.0-3~)
+Section: admin
+Description: Virtualization daemon Xen connection driver
+ Libvirt is a C toolkit to interact with the virtualization capabilities
+ of recent versions of Linux (and other OSes). The library aims at providing
+ a long term stable C API for different virtualization mechanisms. It currently
+ supports QEMU, KVM, XEN, OpenVZ, LXC, and VirtualBox.
+ .
+ This package contains the libvirtd connection driver for Xen.
 
 Package: libvirt-daemon-driver-storage-gluster
 Architecture: linux-any

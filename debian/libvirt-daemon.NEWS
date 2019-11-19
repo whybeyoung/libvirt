@@ -1,3 +1,20 @@
+libvirt (5.6.0-3) 5.6.0-3; urgency=medium
+
+  Just as version 3.7.0-3 separated the storage drivers into individual
+  binary packages - for a smaller amount of default dependencies and the
+  ability to reduce the active codebase for security concerns - this is
+  now done for the connection drivers as well.
+
+  Internal drivers such as interface, network and storage stay part of the
+  libvirt-daemon package for now. But lxc, qemu, vbox and xen are in packages
+  like libvirt-daemon-driver-<type>.
+  By default libvirt-daemon depends on the qemu connection (most common
+  use case) and recommends the further formerly integrated connection types.
+  This allows users concerned about size or active codebase to remove those
+  drivers they do not use.
+
+ -- Christian Ehrhardt <christian.ehrhardt@canonical.com>  Thu, 04 Apr 2019 15:07:34 +0200
+
 libvirt (1.1.4-2) unstable; urgency=low
 
   If you're using cgroups make sure you're using a different mount per cgroup

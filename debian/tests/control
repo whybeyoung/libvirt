@@ -7,7 +7,7 @@ Depends: libvirt-daemon, libvirt-clients, libxml2-utils, qemu-system, qemu-kvm
 Restrictions: allow-stderr, isolation-container
 
 Tests: smoke-lxc
-Depends: libvirt-daemon-system, libvirt-clients, libxml2-utils
+Depends: libvirt-daemon-system, libvirt-daemon-driver-lxc, libvirt-clients, libxml2-utils
 Restrictions: allow-stderr, needs-root
 
 Tests: build-test
