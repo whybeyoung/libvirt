@@ -40,6 +40,7 @@ Files:
   tests/virsh-undefine:
   tests/virsh-vcpupin:
   tests/virt-admin-self-test:
+Copyright: 2008-2019 Red Hat, Inc.
 License: GPL-2+
 
 Files: gnulib/lib
