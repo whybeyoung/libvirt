@@ -117,7 +117,9 @@ Copyright: 2005-2019 Red Hat, Inc
  2015 SUSE LINUX Products GmbH, Nuernberg, Germany.
 License: LGPL-2.1 or later
 
-Files: src/hash.c:
+Files: src/util/virhash.c:
+Copyright: 2005-2014 Red Hat, Inc.
+           2000 Bjorn Reese and Daniel Veillard.
 License:
   Permission to use, copy, modify, and distribute this software for any
   purpose with or without fee is hereby granted, provided that the above
