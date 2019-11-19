@@ -5,18 +5,18 @@ Comment: in addition see the upstream maintainer AUTHORS file
 
 Files: *
 Copyright: 2005-2019 Red Hat, Inc
-License: LGPL-2.1 or later
+License: LGPL-2.1+
 
 Files: src/conf
 Copyright: 2005-2019 Red Hat, Inc
  2006-2014 Red Hat, Inc.
  2015 SUSE LINUX Products GmbH, Nuernberg, Germany.
-License: LGPL-2.1 or later
+License: LGPL-2.1+
 
 Files: src/util/virhash.c:
 Copyright: 2005-2014 Red Hat, Inc.
            2000 Bjorn Reese and Daniel Veillard.
-License:
+License: AS-IS
   Permission to use, copy, modify, and distribute this software for any
   purpose with or without fee is hereby granted, provided that the above
   copyright notice and this permission notice appear in all copies.
@@ -39,15 +39,15 @@ Files:
   tests/virsh-undefine:
   tests/virsh-vcpupin:
   tests/virt-admin-self-test:
-License: GPL-2 or later
+License: GPL-2+
 
 Files: gnulib/lib
 Copyright: 1989-2019 Free Software Foundation, Inc.
-License: LGPL-2.1 or later
+License: LGPL-2.1+
 
 Files: gnulib/tests/
   build-aux/snippet/
-License: GPL-3 or later
+License: GPL-3+
 
 Files: docs/fonts/*
 Copyright: 2015 Red Hat, Inc
