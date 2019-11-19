@@ -54,7 +54,9 @@ Copyright: 1989-2019 Free Software Foundation, Inc.
 License: LGPL-2.1+
 
 Files: gnulib/tests/*
-       build-aux/snippet/*
+       build-aux/config.guess
+       build-aux/config.sub
+       build-aux/vc-list-files
 Copyright: 1989-2019 Free Software Foundation, Inc.
 License: GPL-3+
 
