@@ -17,7 +17,7 @@ License: LGPL-2.1+
 Files: src/util/virhash.c
 Copyright: 2005-2014 Red Hat, Inc.
            2000 Bjorn Reese and Daniel Veillard.
-License: AS-IS
+License: AS-IS-I
   Permission to use, copy, modify, and distribute this software for any
   purpose with or without fee is hereby granted, provided that the above
   copyright notice and this permission notice appear in all copies.
@@ -374,7 +374,7 @@ License:  GPL-2+ or BSD-3-clause
 
 Files: docs/wrapstring.xsl
 Copyright: 2010 Aristotle Pagaltzis
-License: AS-IS
+License: AS-IS-II
  Permission is hereby granted, free of charge, to any person obtaining a copy
  of this software and associated documentation files (the "Software"), to deal
  in the Software without restriction, including without limitation the rights
