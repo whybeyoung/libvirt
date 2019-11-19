@@ -57,6 +57,11 @@ Files: gnulib/tests/
   build-aux/snippet/
 License: GPL-3+
 
+Files:     src/vbox/vbox*
+Copyright: 2008-2009 Sun Microsystems, Inc.
+           2010-2014 Red Hat, Inc.
+License:   LGPL-2.1+
+
 Files: docs/fonts/*
 Copyright: 2015 Red Hat, Inc
 License: SIL-1.1
