@@ -365,6 +365,10 @@ License:   PERMISSIVE
  notice and this notice are preserved.  This file is offered as-is,
  without warranty of any kind.
 
+Files:     src/keycodemapdb/tools/keymap-gen
+Copyright: 2009-2017 Red Hat, Inc.
+License:  GPL-2+ or BSD-3-clause
+
 Files: docs/wrapstring.xsl:
 Copyright: 2010 Aristotle Pagaltzis
 License:
