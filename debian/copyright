@@ -108,11 +108,11 @@ Upstream Author:
   Yuto KAWAMURA(kawamuray) <kawamuray.dadada@gmail.com>
 
 Files: *
-Copyright: 2005-2017 Red Hat, Inc
+Copyright: 2005-2019 Red Hat, Inc
 License: LGPL-2.1 or later
 
 Files: src/conf
-Copyright: 2005-2014 Red Hat, Inc
+Copyright: 2005-2019 Red Hat, Inc
  2006-2014 Red Hat, Inc.
  2015 SUSE LINUX Products GmbH, Nuernberg, Germany.
 License: LGPL-2.1 or later
@@ -144,7 +144,7 @@ Files:
 License: GPL-2 or later
 
 Files: gnulib/lib
-Copyright: 1989-2017 Free Software Foundation, Inc.
+Copyright: 1989-2019 Free Software Foundation, Inc.
 License: LGPL-2.1 or later
 
 Files: gnulib/tests/
