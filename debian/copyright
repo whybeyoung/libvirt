@@ -8,13 +8,13 @@ Copyright: 2005-2019 Red Hat, Inc
 License: LGPL-2.1+
 Comment: Among many source files this also includes many generated, test-data or binary files
 
-Files: src/conf
+Files: src/conf/*
 Copyright: 2005-2019 Red Hat, Inc
  2006-2014 Red Hat, Inc.
  2015 SUSE LINUX Products GmbH, Nuernberg, Germany.
 License: LGPL-2.1+
 
-Files: src/util/virhash.c:
+Files: src/util/virhash.c
 Copyright: 2005-2014 Red Hat, Inc.
            2000 Bjorn Reese and Daniel Veillard.
 License: AS-IS
@@ -28,18 +28,18 @@ License: AS-IS
   CONTRIBUTORS ACCEPT NO RESPONSIBILITY IN ANY CONCEIVABLE MANNER.
 
 Files:
-  build-aux/ltmain.sh:
-  tests/pkix_asn1_tab.c:
-  tests/virsh-cpuset:
-  tests/virsh-optparse:
-  tests/virsh-read-bufsiz:
-  tests/virsh-read-non-seekable:
-  tests/virsh-schedinfo:
-  tests/virsh-self-test:
-  tests/virsh-start:
-  tests/virsh-undefine:
-  tests/virsh-vcpupin:
-  tests/virt-admin-self-test:
+  build-aux/ltmain.sh
+  tests/pkix_asn1_tab.c
+  tests/virsh-cpuset
+  tests/virsh-optparse
+  tests/virsh-read-bufsiz
+  tests/virsh-read-non-seekable
+  tests/virsh-schedinfo
+  tests/virsh-self-test
+  tests/virsh-start
+  tests/virsh-undefine
+  tests/virsh-vcpupin
+  tests/virt-admin-self-test
 Copyright: 2008-2019 Red Hat, Inc.
 License: GPL-2+
 
@@ -49,12 +49,12 @@ Copyright: 1996-1999 Internet Software Consortium.
            2005-2019 Free Software Foundation, Inc.
 License:   ISC
 
-Files: gnulib/lib
+Files: gnulib/lib/*
 Copyright: 1989-2019 Free Software Foundation, Inc.
 License: LGPL-2.1+
 
-Files: gnulib/tests/
-  build-aux/snippet/
+Files: gnulib/tests/*
+       build-aux/snippet/*
 License: GPL-3+
 
 Files:     src/vbox/vbox*
@@ -369,7 +369,7 @@ Files:     src/keycodemapdb/tools/keymap-gen
 Copyright: 2009-2017 Red Hat, Inc.
 License:  GPL-2+ or BSD-3-clause
 
-Files: docs/wrapstring.xsl:
+Files: docs/wrapstring.xsl
 Copyright: 2010 Aristotle Pagaltzis
 License: AS-IS
  Permission is hereby granted, free of charge, to any person obtaining a copy
