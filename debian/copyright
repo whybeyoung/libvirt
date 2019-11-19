@@ -43,6 +43,12 @@ Files:
 Copyright: 2008-2019 Red Hat, Inc.
 License: GPL-2+
 
+Files:     gnulib/lib/inet_ntop.c
+           gnulib/lib/inet_pton.c
+Copyright: 1996-1999 Internet Software Consortium.
+           2005-2019 Free Software Foundation, Inc.
+License:   ISC
+
 Files: gnulib/lib
 Copyright: 1989-2019 Free Software Foundation, Inc.
 License: LGPL-2.1+
