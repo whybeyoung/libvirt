@@ -41,7 +41,7 @@ Files:
   tests/virsh-vcpupin
   tests/virt-admin-self-test
 Copyright: 2008-2019 Red Hat, Inc.
-License: GPL-2+
+License: GPL-2.0+
 
 Files:     gnulib/lib/inet_ntop.c
            gnulib/lib/inet_pton.c
@@ -58,7 +58,7 @@ Files: gnulib/tests/*
        build-aux/config.sub
        build-aux/vc-list-files
 Copyright: 1989-2019 Free Software Foundation, Inc.
-License: GPL-3+
+License: GPL-3.0+
 
 Files:     src/vbox/vbox*
 Copyright: 2008-2009 Sun Microsystems, Inc.
@@ -370,7 +370,7 @@ License:   PERMISSIVE
 
 Files:     src/keycodemapdb/tools/keymap-gen
 Copyright: 2009-2017 Red Hat, Inc.
-License:  GPL-2+ or BSD-3-clause
+License:  GPL-2.0+ or BSD-3-clause
 
 Files: docs/wrapstring.xsl
 Copyright: 2010 Aristotle Pagaltzis
