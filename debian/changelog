@@ -1,3 +1,18 @@
+libvirt (5.6.0-3) unstable; urgency=medium
+
+  * Team upload.
+
+  [ Christian Ehrhardt ]
+  * Move qemu, lxc, uml, vbox and xen connection drivers into separate
+    packages. This reduces the dependencies pulled into default installations.
+    (Closes: #901940)
+  * d/copyright: Update
+
+  [ Guido Günther ]
+  * [362bec6] autopkgtest: Adjust to new path
+
+ -- Guido Günther <agx@sigxcpu.org>  Wed, 27 Nov 2019 11:13:51 +0100
+
 libvirt (5.6.0-2) unstable; urgency=medium
 
   * Team upload.
