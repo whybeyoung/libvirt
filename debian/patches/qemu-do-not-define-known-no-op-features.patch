@@ -1,0 +1,105 @@
+From: Christian Ehrhardt <christian.ehrhardt@canonical.com>
+Date: Thu, 25 Apr 2019 11:04:29 +0200
+Subject: qemu: do not define known no-op features
+
+Qemu dropped cpu features for osxsave and ospke [1][2].
+The reason for the instant removal is that those features were never
+configurable as discussed in [3].
+
+Fortunately the use cases adding those flags in the past are rare, but
+they exist. One that I identified are e.g. older virt-install when used
+with --cpu=host-model and there always could be the case of a user
+adding it to the guest xml.
+
+This triggers an issue like:
+  qemu-system-x86_64: can't apply global Broadwell-noTSX-x86_64-
+  cpu.osxsave=on: Property '.osxsave' not found
+
+Ensure that this does no more break spawning newer qemu versions by
+not rendering those features into the qemu command line.
+
+Fixes: https://bugs.launchpad.net/fedora/+source/qemu/+bug/1825195
+Resolves: https://bugzilla.redhat.com/1644848
+
+[1]: https://git.qemu.org/?p=qemu.git;a=commit;h=f1a2352
+[2]: https://git.qemu.org/?p=qemu.git;a=commit;h=9ccb978
+[3]: https://www.mail-archive.com/qemu-devel@nongnu.org/msg561877.html
+
+Signed-off-by: Christian Ehrhardt <christian.ehrhardt@canonical.com>
+Reviewed-by: Daniel Henrique Barboza <danielhb413@gmail.com>
+Tested-by: Daniel Henrique Barboza <danielhb413@gmail.com>
+---
+ src/qemu/qemu_command.c                        | 23 +++++++++++++++++++++++
+ tests/qemuxml2argvdata/cpu-host-model-cmt.args |  2 +-
+ tests/qemuxml2argvdata/cpu-tsc-frequency.args  |  4 ++--
+ 3 files changed, 26 insertions(+), 3 deletions(-)
+
+diff --git a/src/qemu/qemu_command.c b/src/qemu/qemu_command.c
+index 822d5f8..dbb3d74 100644
+--- a/src/qemu/qemu_command.c
++++ b/src/qemu/qemu_command.c
+@@ -6844,6 +6844,27 @@ qemuBuildGlobalControllerCommandLine(virCommandPtr cmd,
+     return 0;
+ }
+ 
++/**
++ * qemuFeatureNoEffect:
++ * @feature: CPU Feature
++ *
++ * Returns true, if the feature is known to have (never had) an effect on QEMU.
++ * Those features might be dropped in qemu without a longer deprecation cycle
++ * and must therefore be known e.g. to no more define them on command line.
++ */
++static bool
++qemuFeatureNoEffect(virCPUFeatureDefPtr feature)
++{
++    if (!feature->name)
++        return false;
++
++    if (STREQ(feature->name, "osxsave"))
++        return true;
++    if (STREQ(feature->name, "ospke"))
++        return true;
++
++    return false;
++}
+ 
+ static int
+ qemuBuildCpuModelArgStr(virQEMUDriverPtr driver,
+@@ -6912,6 +6933,8 @@ qemuBuildCpuModelArgStr(virQEMUDriverPtr driver,
+         virBufferAsprintf(buf, ",vendor=%s", cpu->vendor_id);
+ 
+     for (i = 0; i < cpu->nfeatures; i++) {
++        if (qemuFeatureNoEffect(&(cpu->features[i])))
++            continue;
+         switch ((virCPUFeaturePolicy) cpu->features[i].policy) {
+         case VIR_CPU_FEATURE_FORCE:
+         case VIR_CPU_FEATURE_REQUIRE:
+diff --git a/tests/qemuxml2argvdata/cpu-host-model-cmt.args b/tests/qemuxml2argvdata/cpu-host-model-cmt.args
+index 8930765..d294e7e 100644
+--- a/tests/qemuxml2argvdata/cpu-host-model-cmt.args
++++ b/tests/qemuxml2argvdata/cpu-host-model-cmt.args
+@@ -9,7 +9,7 @@ QEMU_AUDIO_DRV=none \
+ -S \
+ -machine pc,accel=tcg,usb=off,dump-guest-core=off \
+ -cpu Haswell,+vme,+ds,+acpi,+ss,+ht,+tm,+pbe,+dtes64,+monitor,+ds_cpl,+vmx,\
+-+smx,+est,+tm2,+xtpr,+pdcm,+osxsave,+f16c,+rdrand,+pdpe1gb,+abm,+lahf_lm \
+++smx,+est,+tm2,+xtpr,+pdcm,+f16c,+rdrand,+pdpe1gb,+abm,+lahf_lm \
+ -m 214 \
+ -smp 6,sockets=6,cores=1,threads=1 \
+ -uuid c7a5fdbd-edaf-9455-926a-d65c16db1809 \
+diff --git a/tests/qemuxml2argvdata/cpu-tsc-frequency.args b/tests/qemuxml2argvdata/cpu-tsc-frequency.args
+index b51c200..fbfe239 100644
+--- a/tests/qemuxml2argvdata/cpu-tsc-frequency.args
++++ b/tests/qemuxml2argvdata/cpu-tsc-frequency.args
+@@ -9,8 +9,8 @@ QEMU_AUDIO_DRV=none \
+ -S \
+ -machine pc,accel=kvm,usb=off,dump-guest-core=off \
+ -cpu Haswell,+vme,+ds,+acpi,+ss,+ht,+tm,+pbe,+dtes64,+monitor,+ds_cpl,+vmx,\
+-+smx,+est,+tm2,+xtpr,+pdcm,+osxsave,+f16c,+rdrand,+pdpe1gb,+abm,+lahf_lm,\
+-+invtsc,tsc-frequency=3504000000 \
+++smx,+est,+tm2,+xtpr,+pdcm,+f16c,+rdrand,+pdpe1gb,+abm,+lahf_lm,+invtsc,\
++tsc-frequency=3504000000 \
+ -m 214 \
+ -smp 1,sockets=1,cores=1,threads=1 \
+ -uuid c7a5fdbd-edaf-9455-926a-d65c16db1809 \

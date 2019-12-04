@@ -1,0 +1,88 @@
+From: Jiri Denemark <jdenemar@redhat.com>
+Date: Thu, 6 Jun 2019 14:39:52 +0200
+Subject: qemu: Drop qemuFeatureNoEffect
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+
+We already have virQEMUCapsCPUFilterFeatures for filtering features
+which QEMU does not know about. Let's move osxsave and ospke from
+qemuFeatureNoEffect there.
+
+Signed-off-by: Jiri Denemark <jdenemar@redhat.com>
+Reviewed-by: Ján Tomko <jtomko@redhat.com>
+(cherry picked from commit b12865260a0f24ab86ddaf3547b2f2e2c595d429)
+---
+ src/qemu/qemu_capabilities.c |  9 ++++++++-
+ src/qemu/qemu_command.c      | 24 ++----------------------
+ 2 files changed, 10 insertions(+), 23 deletions(-)
+
+diff --git a/src/qemu/qemu_capabilities.c b/src/qemu/qemu_capabilities.c
+index f504db7..64203de 100644
+--- a/src/qemu/qemu_capabilities.c
++++ b/src/qemu/qemu_capabilities.c
+@@ -2748,6 +2748,11 @@ virQEMUCapsProbeQMPSEVCapabilities(virQEMUCapsPtr qemuCaps,
+ }
+ 
+ 
++/*
++ * Filter for features which should never be passed to QEMU. Either because
++ * QEMU never supported them or they were dropped as they never did anything
++ * useful.
++ */
+ bool
+ virQEMUCapsCPUFilterFeatures(const char *name,
+                              void *opaque)
+@@ -2759,7 +2764,9 @@ virQEMUCapsCPUFilterFeatures(const char *name,
+ 
+     if (STREQ(name, "cmt") ||
+         STREQ(name, "mbm_total") ||
+-        STREQ(name, "mbm_local"))
++        STREQ(name, "mbm_local") ||
++        STREQ(name, "osxsave") ||
++        STREQ(name, "ospke"))
+         return false;
+ 
+     return true;
+diff --git a/src/qemu/qemu_command.c b/src/qemu/qemu_command.c
+index dbb3d74..26c28fe 100644
+--- a/src/qemu/qemu_command.c
++++ b/src/qemu/qemu_command.c
+@@ -6844,27 +6844,6 @@ qemuBuildGlobalControllerCommandLine(virCommandPtr cmd,
+     return 0;
+ }
+ 
+-/**
+- * qemuFeatureNoEffect:
+- * @feature: CPU Feature
+- *
+- * Returns true, if the feature is known to have (never had) an effect on QEMU.
+- * Those features might be dropped in qemu without a longer deprecation cycle
+- * and must therefore be known e.g. to no more define them on command line.
+- */
+-static bool
+-qemuFeatureNoEffect(virCPUFeatureDefPtr feature)
+-{
+-    if (!feature->name)
+-        return false;
+-
+-    if (STREQ(feature->name, "osxsave"))
+-        return true;
+-    if (STREQ(feature->name, "ospke"))
+-        return true;
+-
+-    return false;
+-}
+ 
+ static int
+ qemuBuildCpuModelArgStr(virQEMUDriverPtr driver,
+@@ -6933,7 +6912,8 @@ qemuBuildCpuModelArgStr(virQEMUDriverPtr driver,
+         virBufferAsprintf(buf, ",vendor=%s", cpu->vendor_id);
+ 
+     for (i = 0; i < cpu->nfeatures; i++) {
+-        if (qemuFeatureNoEffect(&(cpu->features[i])))
++        if (!virQEMUCapsCPUFilterFeatures(cpu->features[i].name,
++                                          (virArch *)&def->os.arch))
+             continue;
+         switch ((virCPUFeaturePolicy) cpu->features[i].policy) {
+         case VIR_CPU_FEATURE_FORCE:
