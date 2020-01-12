@@ -180,9 +180,9 @@ override_dh_install-arch:
 
 	# Copy upstream files to debian/ so dh_* can find them
 	cp debian/tmp/usr/lib/libvirt/libvirt-guests.sh \
-	    debian/libvirt-daemon-system.libvirt-guests.init
+	    debian/libvirt-daemon-system-sysv.libvirt-guests.init
 	cp tools/libvirt-guests.sysconf \
-	    debian/libvirt-daemon-system.libvirt-guests.default
+	    debian/libvirt-daemon-system-sysv.libvirt-guests.default
 	cp src/logging/virtlogd.sysconf \
 	    debian/libvirt-daemon-system.virtlogd.default
 	cp src/locking/virtlockd.sysconf \
@@ -228,11 +228,10 @@ endif
 	# executable-not-elf-or-script
 	chmod 644 debian/libvirt-daemon/usr/share/bash-completion/completions/vsh
 
-
 override_dh_installinit:
-	dh_installinit -p libvirt-daemon-system --name=virtlogd --no-stop-on-upgrade
-	dh_installinit -p libvirt-daemon-system --name=libvirtd --restart-after-upgrade -- defaults 28 72
-	dh_installinit -p libvirt-daemon-system --name=libvirt-guests --no-stop-on-upgrade -- defaults 29 71
+	dh_installinit -p libvirt-daemon-system-sysv --name=virtlogd --no-stop-on-upgrade
+	dh_installinit -p libvirt-daemon-system-sysv --name=libvirtd --restart-after-upgrade -- defaults 28 72
+	dh_installinit -p libvirt-daemon-system-sysv --name=libvirt-guests --no-stop-on-upgrade -- defaults 29 71
 
 override_dh_installsystemd:
 	dh_installsystemd -p libvirt-daemon-system --restart-after-upgrade libvirtd.service
