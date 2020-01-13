@@ -30,7 +30,7 @@
 
 
 static void
-eventLoop(void *opaque ATTRIBUTE_UNUSED)
+eventLoop(void *opaque G_GNUC_UNUSED)
 {
     while (1) {
         if (virEventRunDefaultImpl() < 0) {
@@ -47,15 +47,14 @@ main(int argc, char **argv)
     virThread thread;
     virQEMUCapsPtr caps;
 
-    VIR_TEST_PRELOAD(abs_builddir "/.libs/qemucapsprobemock.so");
+    VIR_TEST_PRELOAD(VIR_TEST_MOCK("qemucapsprobe"));
 
     if (argc != 2) {
         fprintf(stderr, "%s QEMU_binary\n", argv[0]);
         return EXIT_FAILURE;
     }
 
-    if (virThreadInitialize() < 0 ||
-        virInitialize() < 0) {
+    if (virInitialize() < 0) {
         fprintf(stderr, "Failed to initialize libvirt");
         return EXIT_FAILURE;
     }
