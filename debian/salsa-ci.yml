@@ -1,0 +1,38 @@
+stages:
+  - build
+
+variables:
+  # Default docker image to use
+  LV_DOCKER_IMAGE: debian:unstable
+  LV_WORKING_DIR: $CI_PROJECT_DIR/debian/output
+
+build-debian-package:
+  image: ${LV_DOCKER_IMAGE}
+  stage: build
+  timeout: 3h
+  before_script:
+    - echo "man-db man-db/auto-update boolean false" | debconf-set-selections
+    - export DEBIAN_FRONTEND=noninteractive
+    - apt-get -y update
+    - apt-get -y install build-essential git-buildpackage pristine-tar
+    - apt-get -y build-dep .
+    - rm -f ../* || true
+  script:
+    - gbp dch -S -a --ignore-branch
+    - mkdir -p "${LV_WORKING_DIR}/tarballs"
+    - gbp export-orig --tarball-dir="${LV_WORKING_DIR}/tarballs"
+                      --pristine-tar
+    - gbp buildpackage --git-ignore-new
+                       --git-ignore-branch
+                       --git-export-dir="${LV_WORKING_DIR}/"
+                       --git-tarball-dir="${LV_WORKING_DIR}/tarballs"
+                        -j -b -uc -us > "${LV_WORKING_DIR}/build.log"
+  artifacts:
+    when: always
+    paths:
+      - "${LV_WORKING_DIR}/build.log"
+    # Once we run lintian/autopkg:
+    #  - "${LV_WORKING_DIR}/*.deb"
+    #  - "${LV_WORKING_DIR}/*.buildinfo"
+    #  - "${LV_WORKING_DIR}/*.changes"
+
