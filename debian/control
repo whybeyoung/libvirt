@@ -43,7 +43,7 @@ Build-Depends:
  libdbus-1-dev [linux-any],
  nfs-common,
  systemtap-sdt-dev [amd64 armel armhf i386 ia64 powerpc s390],
- python,
+ python3,
  xsltproc,
  zfsutils [kfreebsd-amd64 kfreebsd-i386],
  po-debconf,
