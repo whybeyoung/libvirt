@@ -94,6 +94,7 @@ DEB_CONFIGURE_EXTRA_ARGS :=      \
 	--with-packager="$(DEB_BUILDUSER) $(DEB_BUILDDATE)" \
 	--with-packager-version="$(DEB_RELEASE)" \
 	--with-default-editor="sensible-editor" \
+	--enable-dependency-tracking \
 	--disable-silent-rules   \
 	--disable-rpath          \
 	--with-qemu		 \
