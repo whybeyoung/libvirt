@@ -18,8 +18,8 @@ require the 'TERM' environment variable to be set to the terminal type.
      virCommandAddEnvPass(cmd, "KRB5CCNAME");
      virCommandAddEnvPass(cmd, "SSH_AUTH_SOCK");
      virCommandAddEnvPass(cmd, "SSH_ASKPASS");
-+    virCommandAddEnvPass(cmd, "GPG_TTY", NULL);
-+    virCommandAddEnvPass(cmd, "TERM", NULL);
++    virCommandAddEnvPass(cmd, "GPG_TTY");
++    virCommandAddEnvPass(cmd, "TERM");
      virCommandAddEnvPass(cmd, "DISPLAY");
      virCommandAddEnvPass(cmd, "XAUTHORITY");
      virCommandClearCaps(cmd);
