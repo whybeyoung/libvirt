@@ -120,7 +120,6 @@ DEB_CONFIGURE_EXTRA_ARGS :=      \
 	$(WITH_SELINUX)          \
 	$(WITH_APPARMOR)         \
 	--with-esx               \
-	--without-phyp           \
 	$(WITH_CAPNG)		 \
 	--enable-debug		 \
 	$(WITH_MACVTAP)		 \
