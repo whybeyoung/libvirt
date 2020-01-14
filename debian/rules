@@ -18,11 +18,9 @@ ifneq (,$(findstring $(DEB_HOST_ARCH_OS), linux))
     WITH_VBOX         = --without-vbox
   endif
   ifneq (,$(findstring $(DEB_HOST_ARCH), i386 amd64 armhf arm64))
-    WITH_XEN          = --with-xen
     WITH_LIBXL        = --with-libxl
     XEN_ENABLED       = 1
   else
-    WITH_XEN          = --without-xen
     WITH_LIBXL        = --without-libxl
   endif
   MAKE_CHECK        = 1
@@ -84,7 +82,6 @@ else
   WITH_APPARMOR       = --without-apparmor
   WITH_NSS_PLUGIN     = --without-nss-plugin
   WITH_DTRACE         = --without-dtrace
-  WITH_XEN            = --without-xen
   WITH_LIBXL          = --without-libxl
   WITH_VBOX           = --without-vbox
 endif
@@ -125,7 +122,6 @@ DEB_CONFIGURE_EXTRA_ARGS :=      \
 	$(WITH_MACVTAP)		 \
 	$(WITH_NETWORK)		 \
 	$(WITH_NETCF)		 \
-	$(WITH_XEN)		 \
 	$(WITH_LIBXL)		 \
 	$(WITH_VBOX)		 \
 	$(WITH_LXC)              \
