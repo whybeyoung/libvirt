@@ -1,5 +1,6 @@
 stages:
   - build
+  - test
 
 variables:
   # Default docker image to use
@@ -31,8 +32,19 @@ build-debian-package:
     when: always
     paths:
       - "${LV_WORKING_DIR}/build.log"
-    # Once we run lintian/autopkg:
-    #  - "${LV_WORKING_DIR}/*.deb"
-    #  - "${LV_WORKING_DIR}/*.buildinfo"
-    #  - "${LV_WORKING_DIR}/*.changes"
+      - "${LV_WORKING_DIR}/*.deb"
+      - "${LV_WORKING_DIR}/*.buildinfo"
+      - "${LV_WORKING_DIR}/*.changes"
 
+lint-debian-package:
+  image: ${LV_DOCKER_IMAGE}
+  dependencies:
+    - build-debian-package
+  before_script:
+    - echo "man-db man-db/auto-update boolean false" | debconf-set-selections
+    - export DEBIAN_FRONTEND=noninteractive
+    - apt-get -y update
+    - apt-get -y install lintian
+  script:
+    - ls "${LV_WORKING_DIR}"
+    - lintian ${LV_LINTIAN_OPTS} ${LV_WORKING_DIR}/*.changes
