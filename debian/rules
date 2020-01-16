@@ -150,7 +150,6 @@ LIBVIRT_SYSTEM_SERVICES = \
 
 DEB_BUILDDIR := $(CURDIR)/debian/build
 LOGROTATE = $(basename $(basename $(notdir $(wildcard src/remote/libvirtd*.logrotate.in))))
-EXAMPLES_DIR = $(CURDIR)/debian/libvirt-doc/usr/share/doc/libvirt-doc/examples/
 
 %:
 	dh $@ --builddirectory=$(DEB_BUILDDIR)
@@ -236,14 +235,6 @@ override_dh_installsystemd:
 override_dh_installdocs:
 	dh_installdocs -plibvirt-doc --doc-main-package libvirt-doc
 	dh_installdocs -Nlibvirt-doc
-	# Remove binaries and object files examples
-	[ ! -d $(EXAMPLES_DIR) ] || find $(EXAMPLES_DIR) -name "*.o" -type f -delete -o -name .libs -type d -exec rm -rf {} \;
-	rm -f $(EXAMPLES_DIR)domain-events/events-c/event-test \
-	      $(EXAMPLES_DIR)dominfo/info1 \
-	      $(EXAMPLES_DIR)domsuspend/suspend \
-	      $(EXAMPLES_DIR)hellolibvirt/hellolibvirt \
-	      $(EXAMPLES_DIR)apparmor/* \
-	      $(NULL)
 
 override_dh_auto_clean:
 	[ ! -f Makefile ] || dh_auto_clean
