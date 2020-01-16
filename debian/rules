@@ -150,6 +150,9 @@ LIBVIRT_SYSTEM_SERVICES = \
 
 DEB_BUILDDIR := $(CURDIR)/debian/build
 LOGROTATE = $(basename $(basename $(notdir $(wildcard src/remote/libvirtd*.logrotate.in))))
+SRV_MONOLITHIC = libvirt-guests virtlogd virtlockd libvirtd libvirtd-tcp libvirtd-tls virt-guest-shutdown
+# For split daemons later, as of 6.0 the remaining elments are
+#SRV_SPLIT = virtnwfilterd virtinterfaced virtlxcd virtnetworkd virtnodedevd virtproxyd virtqemud virtsecretd virtstoraged virtvboxd virtxend virtproxyd-tcp virtproxyd-tls
 
 %:
 	dh $@ --builddirectory=$(DEB_BUILDDIR)
@@ -187,7 +190,10 @@ override_dh_install-arch:
 	    debian/libvirt-daemon-system/var/lib/polkit-1/localauthority/10-vendor.d/
 ifneq (,$(findstring $(DEB_HOST_ARCH_OS), linux))
 	# Linux supports more nice things:
-	dh_install -p libvirt-daemon-system usr/lib/systemd/system lib/systemd/
+	set -e; for f in $(SRV_MONOLITHIC); do \
+		dh_install -p libvirt-daemon-system  usr/lib/systemd/system/$${f}* \
+			lib/systemd/system/; \
+	done
 	dh_install -p libvirt-daemon-system usr/lib/libvirt/virt-aa-helper
 	dh_install -p libvirt-daemon-system etc/apparmor.d
 	dh_apparmor -p libvirt-daemon-system --profile-name=usr.lib.libvirt.virt-aa-helper
