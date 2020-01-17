@@ -293,7 +293,7 @@ mymain(void)
     DO_TEST("pages-dimm-discard", NONE);
     DO_TEST("hugepages-default", QEMU_CAPS_OBJECT_MEMORY_FILE);
     DO_TEST("hugepages-default-2M", QEMU_CAPS_OBJECT_MEMORY_FILE);
-    DO_TEST("hugepages-default-system-size", NONE);
+    DO_TEST("hugepages-default-system-size", QEMU_CAPS_OBJECT_MEMORY_FILE);
     DO_TEST("hugepages-nodeset", QEMU_CAPS_OBJECT_MEMORY_FILE);
     DO_TEST("hugepages-numa-default-2M", QEMU_CAPS_OBJECT_MEMORY_FILE);
     DO_TEST("hugepages-numa-default-dimm", QEMU_CAPS_OBJECT_MEMORY_FILE);
@@ -524,6 +524,7 @@ mymain(void)
     DO_TEST("encrypted-disk-usage", QEMU_CAPS_QCOW2_LUKS);
     DO_TEST("luks-disks", NONE);
     DO_TEST("luks-disks-source", NONE);
+    DO_TEST_CAPS_LATEST("luks-disks-source-qcow2");
     DO_TEST("memtune", NONE);
     DO_TEST("memtune-unlimited", NONE);
     DO_TEST("blkiotune", NONE);

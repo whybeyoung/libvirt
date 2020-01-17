@@ -1,13 +1,19 @@
 libvirt releases
 ================
 
-# v6.0.0 (unreleased)
+# v6.0.0 (2020-01-15)
 
-  * New features
+  * Packaging changes
+
+    - support for python2 is removed
+        Libvirt is no longer able to be built using the Python 2 binary. Python
+        3 must be used instead.
 
     - docs: the python docutils toolset is now required
         The use of rst2html has been introduced for the website build process
         since docs are now being written in the RST as an alternative to HTML.
+
+  * New features
 
     - new PCI hostdev address type: unassigned
         A new PCI hostdev address type 'unassigned' is introduced. An
@@ -16,6 +22,40 @@ libvirt releases
         option to manage the binding of PCI devices via Libvirt, declaring PCI
         hostdevs in the domain XML but allowing just a subset of them to be
         assigned to the guest.
+
+    - Provide init scripts for sub-deaemons
+        So far libvirt shipped systemd unit files for sub-daemons. With this
+        release, init scripts are available too. Package maintainers can choose
+        which one to install via --with-init-script configure option.
+
+    - qemu: Support cold-unplug of sound devices
+
+    - qemu: Implement VIR_MIGRATE_PARAM_TLS_DESTINATION
+        This flag, which can be enabled using virsh's --tls-destination option,
+        allows migration to succeed in situations where there is a mismatch
+        between the destination's hostname and the information stored in its
+        TLS certificate.
+
+    - qemu: Support reporting memory bandwidth usage stats
+        Implement Intel RDT-MBM in libvirt. The stats can be obtained via virsh
+        domstats --memory.
+
+    - qemu: Allow accessing NVMe disks directly
+        Before this release there were two ways to configure a NVMe disk for a
+        domain. The first was using <disk/> with the <source/> pointing to the
+        /dev/nvmeXXXX. The other was using PCI assignment via <hostdev/>
+        element. Both have their disadvantages: the former adds latency of file
+        system and block layers of the host kernel, the latter prohibits domain
+        migration. In this release the third way of configuring NVMe disk is
+        added which combines the advantages and drops disadvantages of the
+        previous two ways. It's accessible via <disk type='nvme'/>.
+
+  * Removed features
+
+    - 'phyp' Power Hypervisor driver removed
+        The 'phyp' Power Hypervisor driver has not seen active development
+        since 2011 and does not seem to have any real world usage. It has now
+        been removed.
 
   * Improvements
 
@@ -28,18 +68,34 @@ libvirt releases
         running time, at cost of the larest compressed size, lzop should be
         used.
 
+    - domain: Improve job stat handling
+        It is now possible to retrieve stats for completed and failed jobs.
+
+    - qemu: Don't hold monitor and agent job at the same time
+        Before this change, a malicious (or buggy) qemu-guest-agent running in
+        the guest could make other libvirt APIs unavailable for an unbounded
+        amount of time.
+
   * Bug fixes
 
-  * Removed features
+    - qemu: Report error if backing image format is not specified explicitly
+        For a long time libvirt was assuming that a backing file is RAW when
+        the format was not specified. This didn't pose a problem until blockdev
+        support was enabled in last release. Libvirt now requires that the
+        format is specified in the image metadata or domain XML and the VM will
+        refuse to start otherwise. Additionally the error message now links to
+        the knowledge base which summarizes how to fix the images.
 
-    - support for python2 is removed
-        Libvirt is no longer able to be built using the Python 2 binary. Python
-        3 must be used instead.
+    - qemu: Fix non-shared storage migration over NBD
 
-    - 'phyp' Power Hypervisor driver removed
-        The 'phyp' Power Hypervisor driver has not seen active development
-        since 2011 and does not seem to have any real world usage. It has now
-        been removed.
+    - qemu: Generate a single MAC address for hotplugged network devices
+        Since libvirt 4.6.0, when hotplugging a network device that didn't have
+        a MAC address already assigned by the user, two separate addresses
+        would be generated: one for the live configuration, which would show up
+        immediately, and one for the inactive configuration, which would show
+        up after the first reboot. This situation was clearly undesirable, so a
+        single MAC address is now generated and used both for the live
+        configuration and the inactive one.
 
 # v5.10.0 (2019-12-02)
 
@@ -94,11 +150,6 @@ libvirt releases
         Libvirt used Perl scripts to check for coding style, generate some code
         and things like that. To bring the number of languages used down, these
         scripts were rewritten into Python.
-
-    - Provide init scripts for sub-deaemons
-        So far libvirt shipped systemd unit files for sub-daemons. With this
-        release, init scripts are available too. Package maintainers can choose
-        which one to install via --with-init-script configure option.
 
   * Bug fixes
 
