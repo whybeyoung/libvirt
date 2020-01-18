@@ -44,6 +44,7 @@ build-debian-package:
 
 lint-debian-package:
   image: ${LV_DOCKER_IMAGE}
+  stage: test
   dependencies:
     - build-debian-package
   before_script:
@@ -54,3 +55,20 @@ lint-debian-package:
   script:
     - ls "${LV_WORKING_DIR}"
     - lintian ${LV_LINTIAN_OPTS} ${LV_WORKING_DIR}/*.changes
+
+autopkgtest-debian-package:
+  image: ${LV_DOCKER_IMAGE}
+  stage: test
+  dependencies:
+    - build-debian-package
+  before_script:
+    - echo "man-db man-db/auto-update boolean false" | debconf-set-selections
+    - export DEBIAN_FRONTEND=noninteractive
+    - apt-get -y update
+    - apt-get -y install autopkgtest
+  script:
+    - ls "${LV_WORKING_DIR}"
+    - RET=0;
+      autopkgtest -U ${LV_WORKING_DIR}/*.changes -- autopkgtest-virt-null || RET=$?;
+      echo "Autopkgtest exited with ${RET}";
+      [ "${RET}" -eq 8 ] && exit 0 || exit "${RET}"
