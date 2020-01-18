@@ -1,3 +1,29 @@
+libvirt (6.0.0~rc1-1) experimental; urgency=medium
+
+  [ Guido Günther ]
+  * [443fae0] New upstream version 6.0.0~rc1
+  * [70c5676] Bump symbol versions
+  * [eb6c6c1] gitlab-ci: Build package.
+    We unfortunately can't use salsa-ci's prebuilt pipeline since
+    that hangs on large jobs:
+    https://salsa.debian.org/salsa/support/issues/180
+    We redirct output to a file to work around:
+    https://salsa.debian.org/salsa/support/issues/191
+
+  [ Christian Ehrhardt ]
+  * [cc6b955] refresh d/p/* for v6.0.0
+  * [5639ffb] d/control: bump build dep to python3
+  * [dc99d35] d/rules: set enable-dependency-tracking to avoid FTBFS.
+  * [af131c7] d/rules: drop the no more existing xen configure option
+  * [84367d9] d/control: add python3-docutils as build dependency
+  * [37f0a5c] d/libvirt-doc.doc: install rendered docs
+  * [880f00e] d/libvirt-daemon-system.examples: Drop examples that are now
+    conf files
+  * [671aeca] d/libvirt-doc.doc-base.libvirt-doc: adapt doc base to new file
+    placement
+
+ -- Guido Günther <agx@sigxcpu.org>  Sat, 18 Jan 2020 18:16:20 +0100
+
 libvirt (5.6.0-4) experimental; urgency=medium
 
   * [d88536d] Introduce libvirt-daemon-system-{systemd,sysv} Move init scripts
