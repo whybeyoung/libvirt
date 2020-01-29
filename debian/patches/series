@@ -1,3 +1,4 @@
+skip-qemuhotplugtest.patch
 debian/Debianize-libvirt-guests.patch
 debian/Debianize-systemd-service-files.patch
 debian/Debianize-virtlockd.patch
