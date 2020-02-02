@@ -123,7 +123,6 @@ libvirt.so.0 libvirt0 #MINVER#
  *@LIBVIRT_5.6.0 5.6.0
  *@LIBVIRT_5.7.0 6.0.0~rc1
  *@LIBVIRT_5.8.0 6.0.0~rc1
- *@LIBVIRT_5.9.0 6.0.0~rc1
  *@LIBVIRT_5.10.0 6.0.0~rc1
  *@LIBVIRT_6.0.0 6.0.0~rc1
  *@LIBVIRT_PRIVATE_6.0.0 6.0.0~rc1
